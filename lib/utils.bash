@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for go-getter.
 GH_REPO="https://github.com/hashicorp/go-getter"
 TOOL_NAME="go-getter"
 TOOL_TEST="go-getter --help"
@@ -31,9 +30,7 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-  # Change this function if go-getter has other means of determining installable versions.
-  list_github_tags
+  list_github_tags | grep v1
 }
 
 download_release() {
@@ -41,8 +38,7 @@ download_release() {
   version="$1"
   filename="$2"
 
-  # TODO: Adapt the release URL convention for go-getter
-  url="$GH_REPO/archive/v${version}.tar.gz"
+  url="$GH_REPO/releases/download/v${version}/go-getter_${version}_$(uname -s | tr [A-Z] [a-z])_amd64.zip"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -58,10 +54,9 @@ install_version() {
   fi
 
   (
-    mkdir -p "$install_path"
-    cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+    mkdir -p "$install_path/bin"
+    cp "$ASDF_DOWNLOAD_PATH/$TOOL_NAME" "$install_path/bin/"
 
-    # TODO: Asert go-getter executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
