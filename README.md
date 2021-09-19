@@ -2,7 +2,7 @@
 
 # asdf-go-getter [![Build](https://github.com/ryodocx/asdf-go-getter/actions/workflows/build.yml/badge.svg)](https://github.com/ryodocx/asdf-go-getter/actions/workflows/build.yml) [![Lint](https://github.com/ryodocx/asdf-go-getter/actions/workflows/lint.yml/badge.svg)](https://github.com/ryodocx/asdf-go-getter/actions/workflows/lint.yml)
 
-[go-getter](https://github.com/hashicorp/go-getter) plugin for the [asdf version manager](https://asdf-vm.com).
+[hashicorp go-getter](https://github.com/hashicorp/go-getter) plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 
