@@ -30,7 +30,7 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  list_github_tags | grep v1
+  list_github_tags
 }
 
 download_release() {
